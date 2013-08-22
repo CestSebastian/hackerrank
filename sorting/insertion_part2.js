@@ -1,6 +1,8 @@
 process.stdin.resume();
 process.stdin.setEncoding("ascii");
 
+var output = '';
+
 function insertionSort(a) {
     for (var i = 1, len = a.length; i < len; i++) {
         var key = a[i], j=i;
@@ -9,7 +11,7 @@ function insertionSort(a) {
             j--;
         }
         a[j] = key;
-        process.stdout.write(a.join(' ') + '\n');
+        output += a.join(' ') + '\n';
     }
 }
 
@@ -18,5 +20,10 @@ process.stdin.on("data", function (input) {
         len = Number(inArray[0]),
         v = inArray[1].split(' ');
     
+    for (var i=0; i<v.length; i++) {
+        v[i] = Number(v[i]);
+    }
+    
     insertionSort(v);
+    process.stdout.write(output);
 });
