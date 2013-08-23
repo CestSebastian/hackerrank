@@ -32,7 +32,7 @@ function quicksort(v) {
     
     var result = [].concat(sorted1, [p], sorted2);
     
-    process.stdout.write(result.join(',') + '\n');
+    process.stdout.write(result.join(' ') + '\n');
     
     return result;
 }
