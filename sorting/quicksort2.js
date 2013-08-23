@@ -1,6 +1,7 @@
 process.stdin.resume();
 process.stdin.setEncoding("ascii");
 var input = '';
+
 process.stdin.on("data", function (chunk) {
     input += chunk;
 });
@@ -27,18 +28,25 @@ function quicksort(v) {
     
     sorted1 = quicksort(part1);
     
-    //process.stdout.write(sorted1.join(' ') + '\n');
-    
     sorted2 = quicksort(part2);
     
-    process.stdout.write(sorted1.concat([p], sorted2).join(' ') + '\n');
+    var result = [].concat(sorted1, [p], sorted2);
     
-    return sorted1.concat([p], sorted2);
+    process.stdout.write(result.join(',') + '\n');
+    
+    return result;
 }
 
 process.stdin.on("end", function () {
     var inArray = input.split('\n'),
-        v = inArray[1].split(' ').map(Number);
+        v = inArray[1].split(' ').map(function(element) {
+            if (element) { return Number(element); }
+        }),
+        a = [];
     
-    quicksort(v);
+    for (var i = 0; i < v.length; i++) {
+        if (v[i]) a.push(v[i]);
+    }
+    
+    quicksort(a);
 });
